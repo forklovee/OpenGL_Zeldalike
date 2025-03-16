@@ -3,47 +3,84 @@
 #include <stdio.h>
 #include "SDL2/SDL.h"
 
-const int SCREEN_WIDTH = 500;
-const int SCREEN_HEIGHT = 500;
+#include "glad/glad.h"
 
 int main(int argc, char* args[]){
     
-    SDL_Window* window = NULL;
-    SDL_Surface* screen_surface = NULL;
-
-    if(SDL_Init(SDL_INIT_VIDEO) < 0){
-        printf("SDL couldn't initialize!, SDL_Error:%s\n", SDL_GetError());
+    SDL_Window *window;
+    if (SDL_Init(SDL_INIT_VIDEO) < 0){
+        printf("SDL error %s\n", SDL_GetError());
         return -1;
     }
+    SDL_GLContext context;
 
-    window = SDL_CreateWindow("SDL Zeldalike",
+    // Specify OpenGL version
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+    // Request a window
+    window = SDL_CreateWindow(
+        "Zeldalike SDL2",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        SCREEN_WIDTH, SCREEN_HEIGHT,
-        SDL_WINDOW_SHOWN);
-    
-    if (window == NULL){
-        printf("Window couldn't be created! SDL_ERROR:%s\n", SDL_GetError());
+        1280, 720,
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
+    );
+
+    // Check if window was created successfully.
+    if (!window){
+        printf("Window couldn't get created! error: %s", SDL_GetError());
         return -1;
     }
 
-    screen_surface = SDL_GetWindowSurface(window);
-    SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0xff, 0xff, 0xff));
-    SDL_UpdateWindowSurface(window);
+    // Create OpenGL context.
+    context = SDL_GL_CreateContext(window);
     
-    SDL_Event event;
-    bool quit = false;
-    while(!quit){
+    // Check if context got created.
+    if (!context){
+        printf("OpenGL context couldn't get created! error: %s", SDL_GetError());
+        return -1;
+    }
 
-        while(SDL_PollEvent(&event)){
+    // Setup function pointers
+    gladLoadGLLoader(SDL_GL_GetProcAddress);
 
-            switch(event.type){
+    // "infinite" loop.
+    bool isGameRunning = true;
+    while (isGameRunning)
+    {
+        glViewport(0, 0, 1280, 720);
+
+        // event loop
+        SDL_Event event;
+        while(SDL_PollEvent(&event))
+        {
+            switch (event.type){
+                case SDL_MOUSEMOTION:
+                    printf("mouse moving!\n");
+                    break;
                 case SDL_QUIT:
-                    quit = true;
+                    isGameRunning = false;
                     break;
             }
 
+            const Uint8* state = SDL_GetKeyboardState(NULL);
+            if(state[SDL_SCANCODE_RIGHT])
+            {
+                printf("right arrow pressed!\n");
+            }
         }
-    }
 
-    return 1;
+        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        
+        SDL_GL_SwapWindow(window);
+    }
+    
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+    return 0;
 }
