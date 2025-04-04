@@ -6,4 +6,5 @@ Will see how it goes.
 
 <h2>Building</h2>
 CMake takes care of everything.
+
 Just run `cmake` in the root directory.
