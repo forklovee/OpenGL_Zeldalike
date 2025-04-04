@@ -3,3 +3,7 @@
 It's my learning ground for C++, OpenGL, GLAD, GLFW and CMake.
 
 Will see how it goes.
+
+<h2>Building</h2>
+CMake takes care of everything.
+Just run `cmake` in the root directory.
