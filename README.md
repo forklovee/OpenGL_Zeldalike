@@ -1,5 +1,5 @@
-<h1>SDL Zelda-like</h1>
-It's not really finished yet.
-I'm just playing around/learning SDL, OpenGL and CMake.
+<h1>Zeldalike in OpenGL</h1>
+<h2>Not finished yet.</h2>
+It's my learning ground for C++, OpenGL, GLAD, GLFW and CMake.
 
 Will see how it goes.
