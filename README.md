@@ -18,9 +18,6 @@ https://github.com/user-attachments/assets/23afb3c0-970e-486a-8c39-67791b052c26
 - Indexed drawing using EBO
 - Vertex and Fragment shaders getting inputs from CPU and passing data to each other (such as Vertex Color), also working shader uniform (wow.)
 
-### The list of horrible stuff
-- Lack of project structure
-
 ## Building
 CMake takes care of everything.
 
