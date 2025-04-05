@@ -4,6 +4,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "texture.h"
+
 #include "Shader/shader.h"
 
 void framebufferSizeCallback(GLFWwindow* window, int width, int height)
@@ -53,12 +55,16 @@ int main(int argc, char* argv[])
     float vertices[] = {
         0.5f, 0.5f, 0.0f, // top right
         1.0f, 0.0f, 0.0f, // color 1
+        1.0f, 1.0f, // uv
         0.5f, -0.5f, 0.0f, // bottom right
         0.0f, 1.0f, 0.0f, // color 2
+        1.0f, 0.0f, // uv
         -0.5f, -0.5f, 0.0f, // bottom left
         0.0f, 0.0f, 1.0f, // color 3
+        0.0f, 0.0f, // uv
         -0.5f, 0.5f, 0.0f, // top left
-        1.0f, 1.0f, 0.0f // color 4
+        1.0f, 1.0f, 0.0f, // color 4
+        0.0f, 1.0f // uv
     };
     unsigned int indices[] = {
         0, 1, 3, // first triangle
@@ -83,12 +89,20 @@ int main(int argc, char* argv[])
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     // Set Vertex attribute pointers
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(6*sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     Shader shader = Shader("../shaders/vertexShader.glsl", "../shaders/fragmentShader.glsl");
+
+    Texture containerTexture = Texture("../content/textures/container.jpg", 0, GL_REPEAT);
+    Texture wallTexture = Texture("../content/textures/wall.jpg", 1, GL_REPEAT);
+    shader.SetIntParameter("colorTexture1", 0);
+    shader.SetIntParameter("colorTexture2", 1);
+
     // Bind currently used VAO
     glBindVertexArray(VAO);
 

@@ -17,6 +17,7 @@ public:
     void Use();
     template<typename T> void SetParameter(const std::string &name, T value);
     void SetVec4Parameter(const std::string &name, float x, float y, float z, float w);
+    void SetIntParameter(const std::string &name, int value);
 
 private:
     const std::string GetShaderCodeString(const char* shaderFilePath);

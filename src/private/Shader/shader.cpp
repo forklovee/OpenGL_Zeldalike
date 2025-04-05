@@ -35,6 +35,17 @@ void Shader::SetVec4Parameter(const std::string &name, float x, float y, float z
     Use();
 }
 
+void Shader::SetIntParameter(const std::string &name, int value)
+{
+    int modulateLocation = glGetUniformLocation(ID, name.c_str());
+    if (modulateLocation > -1)
+    {
+        glUseProgram(ID);
+        glUniform1i(modulateLocation, value);
+    }
+    Use();
+}
+
 template <typename T>
 void Shader::SetParameter(const std::string &name, T value)
 {
