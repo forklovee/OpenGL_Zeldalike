@@ -17,6 +17,8 @@ https://github.com/user-attachments/assets/23afb3c0-970e-486a-8c39-67791b052c26
 - Vertex Position and Vertex Color stored in a single VBO
 - Indexed drawing using EBO
 - Vertex and Fragment shaders getting inputs from CPU and passing data to each other (such as Vertex Color), also working shader uniform (wow.)
+- Image loading with stb_image
+- Using multiple textures in fragment shader
 
 ## Building
 CMake takes care of everything.
