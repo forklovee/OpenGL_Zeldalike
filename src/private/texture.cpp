@@ -4,6 +4,10 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+Texture::Texture()
+{
+}
+
 Texture::Texture(const char *pathToImage)
 {
     Texture(pathToImage, 0, GL_REPEAT);

@@ -1,5 +1,7 @@
 #include "Shader/shader.h"
 
+#include "camera.h"
+
 #include <type_traits>
 #include <fstream>
 #include <sstream>
@@ -17,6 +19,12 @@ Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath)
     };
 
     LinkShaders(2, shaders);
+}
+
+void Shader::UpdateProjectionView(Camera &camera)
+{
+    SetMat4Parameter("view", camera.GetViewMatrix());
+    SetMat4Parameter("projection", camera.GetProjectionMatrix());
 }
 
 void Shader::Use()

@@ -14,8 +14,12 @@ add_executable(${PROJECT_NAME}
 )
 
 target_sources(${PROJECT_NAME}
+    PRIVATE src/private/app.cpp
+    PRIVATE src/private/mesh.cpp
+    PRIVATE src/private/meshinstance.cpp
     PRIVATE src/private/Shader/shader.cpp
     PRIVATE src/private/texture.cpp
+    PRIVATE src/private/camera.cpp
     
 )
 
