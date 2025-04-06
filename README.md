@@ -8,11 +8,7 @@ Will see how it goes.
 
 ## Current State
 
-
-https://github.com/user-attachments/assets/46d75230-2244-4d45-9c90-4522a1b9303c
-
-
-
+https://github.com/user-attachments/assets/6e05a3ab-17f5-4a3f-a09c-893b0ec510cd
 
 ### What works?
 - Resizing viewport size as the framebuffer's size changes
@@ -24,6 +20,12 @@ https://github.com/user-attachments/assets/46d75230-2244-4d45-9c90-4522a1b9303c
 - Image loading with stb_image
 - Using multiple textures in fragment shader
 - PVM matrices (aka Projection, View and Model transformations)
+- Camera movement by user input
+
+### Controls
+Esc - Quit
+
+WSAD - Move camera
 
 ## Building
 Requires C++ 17 compiler, git and CMake.
@@ -35,9 +37,21 @@ git submodule init
 git submodule update
 ```
 
-3) Run cmake
+3) Create "build" folder
 ```sh
-cmake
+mkdir build
 ```
+
+4) Run CMake
+```sh
+cmake . -B ./build
+```
+  
+6) Run MakeFile in "build" folder
+```sh
+cd build
+make
+```
+
 ## Running
 After building, the executabe will be in the "build" folder.
