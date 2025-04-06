@@ -24,13 +24,24 @@ void Shader::Use()
     glUseProgram(ID);
 }
 
-void Shader::SetVec4Parameter(const std::string &name, float x, float y, float z, float w)
+void Shader::SetMat4Parameter(const std::string &name, glm::mat4 mat)
 {
     int modulateLocation = glGetUniformLocation(ID, name.c_str());
     if (modulateLocation > -1)
     {
         glUseProgram(ID);
-        glUniform4f(modulateLocation, x, y, z, w);
+        glUniformMatrix4fv(modulateLocation, 1, GL_FALSE, glm::value_ptr(mat));
+    }
+    Use();
+}
+
+void Shader::SetVec4Parameter(const std::string &name, glm::vec4 vec)
+{
+    int modulateLocation = glGetUniformLocation(ID, name.c_str());
+    if (modulateLocation > -1)
+    {
+        glUseProgram(ID);
+        glUniform4f(modulateLocation, vec.x, vec.y, vec.z, vec.w);
     }
     Use();
 }

@@ -6,6 +6,7 @@ set(CMAKE_CXX_VERSION 17)
 
 find_package(OpenGL REQUIRED)
 add_subdirectory(external/glfw)
+add_subdirectory(external/glm)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
@@ -28,4 +29,4 @@ target_link_directories(${PROJECT_NAME}
     PRIVATE external/stb_image
 )
 
-target_link_libraries(${PROJECT_NAME} OpenGL::GL glfw)
+target_link_libraries(${PROJECT_NAME} OpenGL::GL glfw glm)

@@ -10,6 +10,6 @@ uniform sampler2D colorTexture2;
 
 void main()
 {
-    FragColor = mix(texture(colorTexture1, uv), texture(colorTexture2, uv*2.0), 0.5);
+    FragColor = mix(texture(colorTexture1, uv), texture(colorTexture2, uv), 0.25);
     FragColor *= vertexColor * modulate;
 }
