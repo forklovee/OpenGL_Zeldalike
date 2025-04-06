@@ -10,7 +10,7 @@ Will see how it goes.
 
 https://github.com/user-attachments/assets/6e05a3ab-17f5-4a3f-a09c-893b0ec510cd
 
-### What works?
+### Features
 - Resizing viewport size as the framebuffer's size changes
 - Input. You can close the window by pressing Esc
 - Drawing shapes from Vertex Data
@@ -20,7 +20,7 @@ https://github.com/user-attachments/assets/6e05a3ab-17f5-4a3f-a09c-893b0ec510cd
 - Image loading with stb_image
 - Using multiple textures in fragment shader
 - PVM matrices (aka Projection, View and Model transformations)
-- Camera movement by user input
+- Camera movement by user input (no rotation yet)
 
 ### Controls
 Esc - Quit
